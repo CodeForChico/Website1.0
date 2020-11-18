@@ -1,0 +1,31 @@
+{
+  "name": "website1.0",
+  "version": "1.0.0",
+  "description": "Code for Chico Website 1.0",
+  "main": "js/index.js",
+  "dependencies": {
+    "jquery": "^3.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-transform-react-jsx": "^7.12.5",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "babel-loader": "^8.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel js/index.js -d js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeForChico/Website1.0.git"
+  },
+  "author": "Paul Davis paul.davis@codeforchico.org",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodeForChico/Website1.0/issues"
+  },
+  "homepage": "https://github.com/CodeForChico/Website1.0#readme"
+}
