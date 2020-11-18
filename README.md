@@ -6,3 +6,7 @@ Yeet!
 
 Browser Sync
 c:\Users\paul.davis\source\repos\CodeforChico\Website1.0>browser-sync start --server --directory --files "*"
+
+npx babel 
+
+npx babel js/index.js --out-file js/index_script.js
