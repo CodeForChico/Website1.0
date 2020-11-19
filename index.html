@@ -28,8 +28,35 @@
         <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script> 
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
+<!-- This is temporarily commented out while the website is under construction-->
+<!--   <script src="js/index_script.js"></script>  -->
 
-     <!--   <script src="js/index_script.js"></script>  -->
+
+<!-- This is for firebase . . . o yeah, btw I am adding firebase to this project :/ -->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyCQNv6m_TGkSoOdnUNOR6dFPANcW84BZr8",
+    authDomain: "codeforchico.firebaseapp.com",
+    databaseURL: "https://codeforchico.firebaseio.com",
+    projectId: "codeforchico",
+    storageBucket: "codeforchico.appspot.com",
+    messagingSenderId: "796780063844",
+    appId: "1:796780063844:web:23fdaa49a727d2ccaf8371",
+    measurementId: "G-ZJ49GTHPXX"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 
 </body>
 </html>
