@@ -1,8 +1,6 @@
-// script file for index.html
+// script file for responsive3.html
 // js.react
-// babel/jsx for react
-
-
+// babel > jsx
 
 /* spining up your dev machine - from the project root directory in comandline
     - run babel 
@@ -265,7 +263,6 @@ class TeamCards extends React.Component{
     }
 }
 
-/*
 class PlayerCards extends React.Component{
     constructor(props){
         super(props);     
@@ -453,7 +450,6 @@ class PlayerStats extends React.Component{
         );
     }
 }
-*/
 function SearchBar(props){
     return(
 

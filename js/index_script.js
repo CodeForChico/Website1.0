@@ -24,36 +24,17 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-// script file for responsive3.html
+// script file for index.html
 // js.react
-// babel > jsx
+// babel/jsx for react
 
 /* spining up your dev machine - from the project root directory in comandline
     - run babel 
         npx babel --watch js --out-dir . --presets react-app/prod
+        This is actially different atm - i liked the old way better 
+        right now run npm build 
     - run browsersync
         browser-sync start  --server --files * --index pages/responsive3.html
-    
-
-/* Things TODO
-    - add a back button
-    - add sort by 
-        position type
-        primary position
-
-    - add filter by
-        position type
-        primary position
-
-    - at the player level it would be nice to be able to drill down into a stat group and see how they compare to 
-        division
-        league
-        overall
-
-        for that stat group
-
-    - look into using these premade react components https://material-ui.com/components/badges/
-
 */
 //typically new react apps have a single app component at the very top
 var App = /*#__PURE__*/function (_React$Component) {
@@ -80,12 +61,7 @@ var App = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleTeamClick = _this.handleTeamClick.bind(_assertThisInitialized(_this));
     _this.handlePlayerClick = _this.handlePlayerClick.bind(_assertThisInitialized(_this));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this)); //states to move through the levels of drill down
-    //searchYear
-    //selectTeam
-    //selectPlayer
-    //viewPlayerStats
-
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -124,112 +100,9 @@ var App = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "getPlayers",
-    value: function getPlayers(teamID) {
-      var _this3 = this;
-
-      var rosterYear = document.getElementById('RosterYear').value;
-      fetch("https://lookup-service-prod.mlb.com/json/named.roster_team_alltime.bam?start_season=%27".concat(rosterYear - 1, "%27&end_season=%27").concat(rosterYear, "%27&team_id=%27").concat(teamID, "%27")).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        _this3.setState({
-          drillDown: 'selectPlayer',
-          data: data.roster_team_alltime.queryResults.row
-        });
-      })["catch"](function (err) {
-        return console.log('Error: ' + err);
-      });
-    }
-  }, {
-    key: "getPlayer",
-    value: function getPlayer(playerID) {
-      var _this4 = this;
-
-      var rosterYear = document.getElementById('RosterYear').value; //Sample PlayerID --> Madison Bumgarner: 518516
-      //Define all of the URLS
-      //player info          http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code=%27mlb%27&player_id=%27493316%27
-
-      var playerInfoAPI = "https://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code=%27mlb%27&player_id=%27".concat(playerID, "%27");
-      /*
-          name_nick
-          primary_stat_type
-          status
-      */
-      //season hitting http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id=%27mlb%27&game_type=%27R%27&season=%272017%27&player_id=%27493316%27
-
-      var seasonHittingAPI = "https://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id=%27mlb%27&game_type=%27R%27&season=%27".concat(rosterYear, "%27&player_id=%27").concat(playerID, "%27"); //season pitching 
-
-      var seasonPitchingAPI = "https://lookup-service-prod.mlb.com/json/named.sport_pitching_tm.bam?league_list_id=%27mlb%27&game_type=%27R%27&season=%27".concat(rosterYear, "%27&player_id=%27").concat(playerID, "%27"); //Sample PlayerID --> Madison Bumgarner: 518516
-
-      /*
-          
-         g  - Games
-         gs - Games Started
-         qs -  Quality Starts
-         bqs - Blown Quality Starts
-         ip - Innings Pitched
-          
-          Total Batters
-         so - Strike Outs
-         bb - Base on Balls 
-         np - Total Pitches
-         hb - hit batters
-          h   - Hits
-         db  - Doubles
-          Tripples
-         hr   - Home Runs
-         gs   - Grand Slams
-         r    - Runs
-         er   - Earned Runs
-         gidp - GIDP (ground into douple play)
-            bb9 - BB/9
-          k9 - k/9 strikes ber inning 
-          kbb - strike to walk ratio
-          rs9 - rs/9
-          h9  - H/9
-          hr9 - HR/9
-      */
-      //career hitting 'http://lookup-service-prod.mlb.com/json/named.sport_career_hitting.bam?league_list_id=%27mlb%27&game_type=%27R%27&player_id=%'+playerID+'%27'
-
-      var careerHittingAPI = "https://lookup-service-prod.mlb.com/json/named.sport_career_hitting.bam?league_list_id=%27mlb%27&game_type=%27R%27&player_id=%27".concat(playerID, "%27"); //career pitching  http://lookup-service-prod.mlb.com/json/named.sport_career_pitching.bam?league_list_id='mlb'&game_type='R'&player_id='592789'
-
-      var careerPitchingAPI = "https://lookup-service-prod.mlb.com/json/named.sport_career_pitching.bam?league_list_id=%27mlb%27&game_type=%27R%27&player_id=%27".concat(playerID, "%27"); //projected hitting https://appac.github.io/mlb-data-api-docs/#stats-data-projected-hitting-stats-get
-
-      var projectedHittingAPI = "https://lookup-service-prod.mlb.com/json/named.proj_pecota_batting.bam?season=%27".concat(rosterYear, "%27&player_id=%27").concat(playerID, "%27"); //projected pitching https://appac.github.io/mlb-data-api-docs/#stats-data-projected-pitching-stats-get
-
-      var projectedPitchingAPI = "https://lookup-service-prod.mlb.com/json/named.proj_pecota_pitching.bam?season=%27".concat(rosterYear, "%27&player_id=%27").concat(playerID, "%27"); //initialize and array as a collection of all of the urls
-
-      var urls = [playerInfoAPI, seasonHittingAPI, seasonPitchingAPI, careerHittingAPI, careerPitchingAPI, projectedHittingAPI, projectedPitchingAPI]; //iterate over the array to fetch all of the URLs
-
-      var requests = urls.map(function (url) {
-        return fetch(url);
-      }); //use promises.all to wait for a response from all of the fetch promises
-
-      Promise.all(requests).then(function (responses) {
-        return Promise.all(responses.map(function (response) {
-          return response.json();
-        }));
-      }).then(function (data) {
-        console.log(data);
-
-        _this4.setState({
-          drillDown: 'playerStats',
-          data: data[0].player_info.queryResults.row,
-          seasonHittingData: data[1].sport_hitting_tm.queryResults.row,
-          seasonPitchingData: data[2].sport_pitching_tm.queryResults.row,
-          careerHittingData: data[3].sport_career_hitting.queryResults.row,
-          careerPitchingData: data[4].sport_career_pitching.queryResults.row,
-          projHittingData: data[5].proj_pecota_batting.queryResults.row,
-          projPitchingData: data[6].proj_pecota_pitching.queryResults.row
-        });
-      })["catch"](function (error) {
-        return console.log("error: ".concat(error));
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this3 = this;
 
       var drillDown = this.state.drillDown;
       var data = this.state.data;
@@ -276,7 +149,7 @@ var App = /*#__PURE__*/function (_React$Component) {
                 venueName: venue_name,
                 league: division_abbrev,
                 onClick: function onClick() {
-                  return _this5.handleTeamClick(mlb_org_id);
+                  return _this3.handleTeamClick(mlb_org_id);
                 }
               })
             );
@@ -303,7 +176,7 @@ var App = /*#__PURE__*/function (_React$Component) {
               "throws": _throws,
               jerseyNumber: jersey_number,
               onClick: function onClick() {
-                return _this5.handlePlayerClick(player_id);
+                return _this3.handlePlayerClick(player_id);
               }
             });
           });
@@ -318,13 +191,6 @@ var App = /*#__PURE__*/function (_React$Component) {
             "in": inches,
             weight: data['weight'],
             jerseyNumber: data['jersey_number']
-            /* 7/13/20 ready to add the props in to display the data, just look it over to get the syntax right for eeach datapoint.         */
-            //                      games={seasonPitchingData['g']}
-            //                      gamesStarted={seasonPitchingData['gs']}
-            //                      qualityStarts={seasonPitchingData['qs']}
-            //                      blownQualityStarts={seasonPitchingData['bqs']}
-            //                      inningsPitched={seasonPitchingData['ip']}
-
           });
           break;
       }
@@ -342,23 +208,23 @@ var Ribbon = /*#__PURE__*/function (_React$Component2) {
   var _super2 = _createSuper(Ribbon);
 
   function Ribbon(props) {
-    var _this6;
+    var _this4;
 
     _classCallCheck(this, Ribbon);
 
-    _this6 = _super2.call(this, props);
+    _this4 = _super2.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this6), "handleSubmit", function (event) {
-      console.log('A value was submitted: ' + _this6.state.value);
+    _defineProperty(_assertThisInitialized(_this4), "handleSubmit", function (event) {
+      console.log('A value was submitted: ' + _this4.state.value);
       event.preventDefault();
     });
 
-    _this6.state = {
+    _this4.state = {
       value: ''
     };
-    _this6.handleChange = _this6.handleChange.bind(_assertThisInitialized(_this6));
-    _this6.handleSubmit = _this6.handleSubmit.bind(_assertThisInitialized(_this6));
-    return _this6;
+    _this4.handleChange = _this4.handleChange.bind(_assertThisInitialized(_this4));
+    _this4.handleSubmit = _this4.handleSubmit.bind(_assertThisInitialized(_this4));
+    return _this4;
   }
 
   _createClass(Ribbon, [{
@@ -451,262 +317,196 @@ var TeamCards = /*#__PURE__*/function (_React$Component3) {
 
   return TeamCards;
 }(React.Component);
-
-var PlayerCards = /*#__PURE__*/function (_React$Component4) {
-  _inherits(PlayerCards, _React$Component4);
-
-  var _super4 = _createSuper(PlayerCards);
-
-  function PlayerCards(props) {
-    _classCallCheck(this, PlayerCards);
-
-    return _super4.call(this, props);
-  }
-
-  _createClass(PlayerCards, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/React.createElement("div", {
-        className: "card",
-        onClick: this.props.onClick
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-5"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body"
-      }, this.props.playerName)), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      }, this.props.posDes.toLowerCase(), " ")), /*#__PURE__*/React.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      }, this.props.primPos)), /*#__PURE__*/React.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      }, "#", this.props.jerseyNumber))), /*#__PURE__*/React.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-10"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      })))));
+/*
+class PlayerCards extends React.Component{
+    constructor(props){
+        super(props);     
     }
-  }]);
 
-  return PlayerCards;
-}(React.Component);
-
-var PlayerStats = /*#__PURE__*/function (_React$Component5) {
-  _inherits(PlayerStats, _React$Component5);
-
-  var _super5 = _createSuper(PlayerStats);
-
-  function PlayerStats(props) {
-    _classCallCheck(this, PlayerStats);
-
-    return _super5.call(this, props);
-  }
-
-  _createClass(PlayerStats, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/React.createElement("div", {
-        className: "card bg-dark",
-        onClick: this.props.onClick
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "card-body bg-light team-card"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body"
-      }, this.props.name))), /*#__PURE__*/React.createElement("div", {
-        className: "row cust-card-text-small"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      }, "age:")), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body"
-      }, this.props.age)), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      }, "height:")), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body"
-      }, this.props.ft, "' ", this.props["in"], "\""))), /*#__PURE__*/React.createElement("div", {
-        className: "row cust-card-text-small"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      }, "weight:")), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body"
-      }, this.props.weight, " lbs")), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      }, "jersey:")), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text"
-      }, "#", this.props.jerseyNumber))), /*#__PURE__*/React.createElement("div", {
-        className: "row align-items-start"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }, "Games")), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }, this.props.games)), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }, "GamesStarted")), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }, this.props.gamesStarted))), /*#__PURE__*/React.createElement("div", {
-        className: "row align-items-start"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }, "QualityStarts")), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }, this.props.qualityStarts)), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }, "BlownQualityStarts")), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }, this.props.blownQualityStarts, "         "))), /*#__PURE__*/React.createElement("div", {
-        className: "row align-items-start"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body  cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }))), /*#__PURE__*/React.createElement("div", {
-        className: "row align-items-start"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body  cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }))), /*#__PURE__*/React.createElement("div", {
-        className: "row align-items-start"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body  cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }))), /*#__PURE__*/React.createElement("div", {
-        className: "row align-items-start"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body  cust-card-text-small"
-      })), /*#__PURE__*/React.createElement("div", {
-        className: "col-3"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-small"
-      }))), /*#__PURE__*/React.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body"
-      }, this.props.games)), /*#__PURE__*/React.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body"
-      }, this.props.gamesStarted)), /*#__PURE__*/React.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      }, this.props.qualityStarts)), /*#__PURE__*/React.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      }, this.props.blownQualityStarts)), /*#__PURE__*/React.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      }, this.props.inningsPitched)), /*#__PURE__*/React.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/React.createElement("p", {
-        className: "card-text text-body cust-card-text-right"
-      })))));
+    render() {
+        return(
+            <div className="card" onClick={this.props.onClick}>    
+                <div className="card-body">    
+                    <div className="row">
+                        <div className="col-5">
+                            <p className="card-text text-body">{this.props.playerName}</p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-right">{this.props.posDes.toLowerCase()} </p>
+                        </div>
+                        <div className="col-2">
+                            <p className="card-text text-body cust-card-text-right">{this.props.primPos}</p>
+                        </div>
+                        <div className="col-2">
+                            <p className="card-text text-body cust-card-text-right">#{this.props.jerseyNumber}</p>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-10">
+                            <p className="card-text text-body">{}</p>
+                        </div>
+                        <div className="col-2">
+                            <p className="card-text text-body cust-card-text-right">{}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        );
     }
-  }]);
+}
+class PlayerStats extends React.Component{
+    constructor(props){
+        super(props);     
+    }
+    render() {
+        return(
+            <div className="card bg-dark" onClick={this.props.onClick}>    
+                <div className="card-body bg-light team-card">    
+                    <div className="row">
+                        <div className="col">
+                            <p className="card-text text-body">{this.props.name}</p>
+                        </div>
+                    </div>
+                    <div className="row cust-card-text-small">
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-right">age:</p>
+                        </div>                        
+                        <div className="col-3">
+                            <p className="card-text text-body">{this.props.age}</p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-right">height:</p>
+                        </div>                         
+                        <div className="col-3">
+                            <p className="card-text text-body">{this.props.ft}' {this.props.in}"</p>
+                        </div>
+                    </div>
+                    <div className="row cust-card-text-small">
+                    <div className="col-3">
+                            <p className="card-text text-body cust-card-text-right">weight:</p>
+                        </div>                     
+                        <div className="col-3">
+                            <p className="card-text text-body">{this.props.weight} lbs</p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-right">jersey:</p>
+                        </div>                         
+                        <div className="col-3">
+                            <p className="card-text">#{this.props.jerseyNumber}</p>
+                        </div>
+                    </div>
+                    <div className="row align-items-start">
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small">Games</p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small">{this.props.games}</p>
+                        </div>                        
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small">GamesStarted</p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small">{this.props.gamesStarted}</p>
+                        </div>                           
+                    </div>
+                    <div className="row align-items-start">
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small">QualityStarts</p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small">{this.props.qualityStarts}</p>
+                        </div>                           
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small">BlownQualityStarts</p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small">{this.props.blownQualityStarts}         </p>
+                        </div>                           
+                    </div>
+                    <div className="row align-items-start">
+                        <div className="col-6">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>                           
+                        <div className="col-6">
+                            <p className="card-text text-body  cust-card-text-small"></p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>                           
+                    </div>
+                    <div className="row align-items-start">
+                        <div className="col-6">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>                           
+                        <div className="col-6">
+                            <p className="card-text text-body  cust-card-text-small"></p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>                           
+                    </div>
+                    <div className="row align-items-start">
+                        <div className="col-6">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>                           
+                        <div className="col-6">
+                            <p className="card-text text-body  cust-card-text-small"></p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>                           
+                    </div>
+                    <div className="row align-items-start">
+                        <div className="col-6">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>                           
+                        <div className="col-6">
+                            <p className="card-text text-body  cust-card-text-small"></p>
+                        </div>
+                        <div className="col-3">
+                            <p className="card-text text-body cust-card-text-small"></p>
+                        </div>                           
+                    </div>                                                            
 
-  return PlayerStats;
-}(React.Component);
+                    <div className="row">
+                        <div className="col-2">
+                            <p className="card-text text-body">{this.props.games}</p>
+                        </div>
+                        <div className="col-2">
+                            <p className="card-text text-body">{this.props.gamesStarted}</p>
+                        </div>
+                        <div className="col-2">
+                            <p className="card-text text-body cust-card-text-right">{this.props.qualityStarts}</p>
+                        </div>
+                        <div className="col-2">
+                            <p className="card-text text-body cust-card-text-right">{this.props.blownQualityStarts}</p>
+                        </div>
+                        <div className="col-2">
+                            <p className="card-text text-body cust-card-text-right">{this.props.inningsPitched}</p>
+                        </div>
+                        <div className="col-2">
+                            <p className="card-text text-body cust-card-text-right">{}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        );
+    }
+}
+*/
+
 
 function SearchBar(props) {
   return /*#__PURE__*/React.createElement("input", {
