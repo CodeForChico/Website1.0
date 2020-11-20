@@ -8,5 +8,5 @@ author: Paul Davis
 
 #directory where jekyll reads
 #source: 
-baseurl: /app/build/ 
+baseurl: /app/build/index.html 
 url: "https://codeforchico.org"
