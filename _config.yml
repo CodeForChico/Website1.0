@@ -7,4 +7,6 @@ title: Code For Chico
 author: Paul Davis
 
 #directory where jekyll reads
-source: /app/
+#source: 
+baseurl: /app/ 
+url: "https://codeforchico.org"
