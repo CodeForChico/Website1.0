@@ -7,3 +7,4 @@ Starting over again. . . we'll get it don't worry.
 
 Running:
    - Bootstrap
+   - jquery
