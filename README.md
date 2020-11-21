@@ -4,3 +4,6 @@ Goal: Landing page, volunteers and partners express interest in getting involved
 
 Starting over again. . . we'll get it don't worry.
 
+
+Running:
+   - Bootstrap
