@@ -10,4 +10,4 @@ repository: https://github.com/CodeForChico/Website1.0/
 safe                : false
 include             : ["node_modules"]
 
-baseurl: /Website1.0
+baseurl:
