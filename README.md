@@ -14,11 +14,11 @@ Take this with a grain of salt because I don't really know what I am doing.
 I build this with npx crete-react-app. Then I installed npm gh-pages and set up the package.json file per the instructions to add a predeploy and deploy scripts.
 
 There is a wierd and confising thing going on in the branch structure of the repo so LOOKOUT!
-    Basically, Im developing on master, but when I run npm run deploy from cmd console of /Website1.0 on Master branch it published a producution copy of the app to the Main branch of the repo on git. This is the source for the gh-pages Code For America website at codeforamerica.org
+    Basically, Im developing on MAIN branch, but when I run npm run deploy from cmd console of /Website1.0 on MAIM branch it published a producution copy of the app to the MASTER branch of the repo on git. This MASTER brach is the source for the gh-pages Code For America website at codeforamerica.org
 
     BOOM
 
-    The thing thats most confusing is the instruction had me init a repo at Website1.0/codeforchico which is inside of my CodeForChico/Website1.0 repo. I think it just needs to be git init + the remote is set on this sub repo, i think it allows the deploy to the build dir to main branch? yeesh
+    The thing thats most confusing is the instruction had me init a repo at Website1.0/codeforchico which is inside of my CodeForChico/Website1.0 repo. I think it just needs to be git init + the remote is set on this sub repo, i think it allows the deploy to the build dir to MASTER branch? yeesh
     ex:
     [git]  /CodeForChico/Website1.0/codeforchico$ git remote -v
     origin  https://github.com/CodeForChico/Website1.0 (fetch)
