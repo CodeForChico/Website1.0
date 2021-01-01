@@ -45,6 +45,11 @@
   padding: 10pt;
 }
 
+.col{
+  padding-top: 5pt;
+  padding-bottom: 5pt;
+}
+
 /* .card-header{
   background-color: chartreuse;
 } */
