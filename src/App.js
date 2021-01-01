@@ -25,14 +25,14 @@ function App() {
             <Card.Body>
                 <p>If you are just learning or have years of experience we need your help to build good things together.</p>
                 <p>See how you can help</p>
-                <Button>Volunteer</Button>
+                <Button variant = "outline-primary">Volunteer</Button>
             </Card.Body>
         </Card>
         <Card>
             <Card.Title>Become a Comunity Partner</Card.Title>
             <Card.Body>
                 <p>We work with Community Organizations and Local Governments to fix local services, and utilize open data to increase community awareness.</p>
-                <Button>Join Us</Button>
+                <Button varint = "outline-primary">Join Us</Button>
             </Card.Body>
         </Card>
     </div>
