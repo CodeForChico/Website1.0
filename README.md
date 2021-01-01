@@ -1,4 +1,31 @@
-# Getting Started with Create React App
+# Code for Chico
+
+This is Code for Chico - we are a brand new not for profit organization in Chico, CA.
+Our goal is to help make the comunity we live in a better place for all who live here.
+
+If you would like to contact us reach out to paul.davis@codeforchico.org
+
+yeet
+
+## Notes Hey its New Years Day 2021
+So because I kind of got this working a little bit, I think I should take some notes about how its working.
+Take this with a grain of salt because I don't really know what I am doing.
+
+I build this with npx crete-react-app. Then I installed npm gh-pages and set up the package.json file per the instructions to add a predeploy and deploy scripts.
+
+There is a wierd and confising thing going on in the branch structure of the repo so LOOKOUT!
+    Basically, Im developing on master, but when I run npm run deploy from cmd console of /Website1.0 on Master branch it published a producution copy of the app to the Main branch of the repo on git. This is the source for the gh-pages Code For America website at codeforamerica.org
+
+    BOOM
+
+    The thing thats most confusing is the instruction had me init a repo at Website1.0/codeforchico which is inside of my CodeForChico/Website1.0 repo. I think it just needs to be git init + the remote is set on this sub repo, i think it allows the deploy to the build dir to main branch? yeesh
+    ex:
+    [git]  /CodeForChico/Website1.0/codeforchico$ git remote -v
+    origin  https://github.com/CodeForChico/Website1.0 (fetch)
+    origin  https://github.com/CodeForChico/Website1.0 (push) 
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
