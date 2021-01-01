@@ -27,10 +27,10 @@ There is a wierd and confising thing going on in the branch structure of the rep
 ## Spin up a new Dev Sesh from Scratch
 *Again this won't be perfect:*
     1. clone the CodeForChico/Website1.0 repo - you will need MAIN and MASTER branches
-    2. you need like node.js and stuff. I think you run npm install on your locol repo? to make sure you have all the pakage dependencies you need locally? I am new at this. You also need to have git installed. I use WSL for my git on windows, but i had to install git for windows, and set my globals in order for npm run deploy in step 5 to work right.
-    3. if you get it right, you should be able to then run npm start and you'll have a dev session running with a local server and a browser session with the app at local host. 
+    2. you need like node.js and stuff. I think you run **npm install** on your locol repo? to make sure you have all the pakage dependencies you need locally? I am new at this. You also need to have git installed. I use WSL for my git on windows, but i had to install git for windows, and set my globals in order for npm run deploy in step 5 to work right.
+    3. if you get it right, you should be able to then run **npm start** and you'll have a dev session running with a local server and a browser session with the app at local host. 
     4. dev should only be done in the src directory. Once you have your stuff working locally, commit the changes to MAIN repo remote (github)
-    5. stop your dev session and run npm run deploy, this will publish the production copy to CodeForChico. If you get errors here, which I did, a lot, i needed to install git. reach out to paul.davis@codeforchico.org if you get stuck.
+    5. stop your dev session and run **npm run deploy**, this will publish the production copy to CodeForChico. If you get errors here, which I did, a lot, i needed to install git. reach out to paul.davis@codeforchico.org if you get stuck.
 
 
 ## Getting Started with Create React App
