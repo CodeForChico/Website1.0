@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.btn-basic{
+  border-color: black;
+}
+
+.row{
+  padding: 10pt;
+}
+
+/* .card-header{
+  background-color: chartreuse;
+} */
+
+/* .card-body{
+  background-color: black;
+  color: chartreuse;
+} */

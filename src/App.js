@@ -4,6 +4,9 @@ import './App.css';
 // import Primary from 'react-bootstrap/'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 
 function App() {
@@ -21,18 +24,30 @@ function App() {
             </Card.Body>
         </Card>
         <Card>
-            <Card.Title>Become a Volunteer</Card.Title>
+            <Card.Header>Become a Volunteer</Card.Header>
             <Card.Body>
                 <p>If you are just learning or have years of experience we need your help to build good things together.</p>
                 <p>See how you can help</p>
-                <Button variant = "outline-primary">Volunteer</Button>
+                <Button variant = "basic">Volunteer</Button>
             </Card.Body>
         </Card>
         <Card>
-            <Card.Title>Become a Comunity Partner</Card.Title>
+            <Card.Header>Become a Comunity Partner</Card.Header>
             <Card.Body>
-                <p>We work with Community Organizations and Local Governments to fix local services, and utilize open data to increase community awareness.</p>
-                <Button varint = "outline-primary">Join Us</Button>
+                <Container fluid>
+                    <Row>
+                        <Col>We work with</Col>
+                    </Row>
+                    <Row>
+                        <Col>Community Organizations</Col>
+                        <Col>Local Governments</Col>
+                        <Col>Volunteers</Col>
+                    </Row>
+                    <Row>To fix local services, utilize open data, to increase community awareness
+                         and to look for creative solutions to challenging problems.
+                    </Row>
+                </Container>
+                <Button variant = "basic">Join Us</Button>
             </Card.Body>
         </Card>
     </div>
