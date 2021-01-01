@@ -10,7 +10,7 @@ function App() {
           <div class = "h-10 d-flex">
               <div class="w-100 h-100 card">
                   <div class="card-body">
-                      <h3 class="card-title">Code for Chico </h3>
+                      <h3 class="card-title">Code for Pico </h3>
                   </div>
               </div>
           </div>
