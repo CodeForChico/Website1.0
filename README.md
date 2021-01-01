@@ -5,7 +5,7 @@ Our goal is to help make the comunity we live in a better place for all who live
 
 If you would like to contact us reach out to paul.davis@codeforchico.org
 
-yeet
+**_yeet_**
 
 ## Notes Hey its New Years Day 2021
 So because I kind of got this working a little bit, I think I should take some notes about how its working.
@@ -16,7 +16,7 @@ I build this with npx crete-react-app. Then I installed npm gh-pages and set up 
 There is a wierd and confising thing going on in the branch structure of the repo so LOOKOUT!
     Basically, Im developing on MAIN branch, but when I run npm run deploy from cmd console of /Website1.0 on MAIM branch it published a producution copy of the app to the MASTER branch of the repo on git. This MASTER brach is the source for the gh-pages Code For America website at codeforamerica.org
 
-    BOOM
+    **BOOM**
 
     The thing thats most confusing is the instruction had me init a repo at Website1.0/codeforchico which is inside of my CodeForChico/Website1.0 repo. I think it just needs to be git init + the remote is set on this sub repo, i think it allows the deploy to the build dir to MASTER branch? yeesh
     ex:
@@ -25,16 +25,16 @@ There is a wierd and confising thing going on in the branch structure of the rep
     origin  https://github.com/CodeForChico/Website1.0 (push) 
 
 ## Spin up a new Dev Sesh from Scratch
-Again this won't be perfect:
-    1 - clone the CodeForChico/Website1.0 repo - you will need MAIN and MASTER branches
-    2 - you need like node.js and stuff. I think you run npm install on your locol repo? to make sure you have all the pakage dependencies you need locally? I am new at this. You also need to have git installed. I use WSL for my git on windows, but i had to install git for windows, and set my globals in order for npm run deploy in step 5 to work right.
-    3 - If you get it right, you should be able to then run npm start and you'll have a dev session running with a local server and a browser session with the app at local host. 
-    4 - Dev should only be done in the src directory. Once you have your stuff working locally, commit the changes to MAIN repo remote (github)
-    5 - stop you dev session and run npm run deploy, this will publish the production copy to CodeForChico. If you get errors here, which I did, a lot, i needed to install git. reach out to paul.davis@codeforchico.org if you get stuck.
+*Again this won't be perfect:*
+    1. clone the CodeForChico/Website1.0 repo - you will need MAIN and MASTER branches
+    2. you need like node.js and stuff. I think you run npm install on your locol repo? to make sure you have all the pakage dependencies you need locally? I am new at this. You also need to have git installed. I use WSL for my git on windows, but i had to install git for windows, and set my globals in order for npm run deploy in step 5 to work right.
+    3. if you get it right, you should be able to then run npm start and you'll have a dev session running with a local server and a browser session with the app at local host. 
+    4. dev should only be done in the src directory. Once you have your stuff working locally, commit the changes to MAIN repo remote (github)
+    5. stop your dev session and run npm run deploy, this will publish the production copy to CodeForChico. If you get errors here, which I did, a lot, i needed to install git. reach out to paul.davis@codeforchico.org if you get stuck.
 
 
 ## Getting Started with Create React App
-
+*From here down is the create-react-app boilerplade README - im not ready to part with it yet*
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
