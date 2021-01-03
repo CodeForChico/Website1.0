@@ -13,28 +13,25 @@ import Col from 'react-bootstrap/Col'
 // import App from './App working_keepsafe';
 
 class App extends React.Component{
-    constructor(props){
-        super(props);
-        this.state ={
-            page: 'home'
-        }
-    }
     render(){
-        const page= this.state.page;
 
         return(
-                <Navigation />,
-                <VolunteerCard />,
+            <div className="App">
+                <Navigation 
+                    onSubmit = {this.handleSubmit}
+                />
+                <VolunteerCard />
                 <ComunityPartnerCard />
-            
+            </div>
         );
     }
 }
 
 class Navigation extends React.Component{
+
     render(){
         return(
-            <div className ="App">
+            <div className ="Nav">
                 <Card>
                     <Card.Img></Card.Img>
                     <Card.Body>
@@ -47,6 +44,7 @@ class Navigation extends React.Component{
 }
 
 class VolunteerCard extends React.Component{
+   
     render(){
         return(
             <Card>
@@ -54,13 +52,15 @@ class VolunteerCard extends React.Component{
                 <Card.Body>
                     <p>If you are just learning or have years of experience we need your help to build good things together.</p>
                     <p>See how you can help</p>
-                    <Button variant = "basic">Volunteer</Button>
+                    <VolunteerButton label="Volunteer" />
                 </Card.Body>
             </Card>
         );
     }
 }
+
 class ComunityPartnerCard extends React.Component{
+
     render(){
         return(
         <Card>
@@ -79,11 +79,26 @@ class ComunityPartnerCard extends React.Component{
                          and to look for creative solutions to challenging problems.
                     </Row>
                 </Container>
-                <Button variant = "basic">Join Us</Button>
+                <VolunteerButton label ='Join Us'/>
             </Card.Body>
         </Card>
         );
     }
 }
- 
+
+
+class VolunteerButton extends React.Component{
+    render(){
+        return(
+            <Button 
+                variant = "basic"
+                onClick = {function() {alert('Thank you for your interest! Please come back soon we are still building this site!')}}
+                >
+            {this.props.label}
+            </Button>
+        )
+    }
+}
+
+
 export default App;
