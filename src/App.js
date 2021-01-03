@@ -34,12 +34,6 @@ var database = firebase.database()
 
 console.log(database.rows)
 
-// var defaultStorage = defaultProject.storage()
-// var defaultFirestore = defaultProject.firestore()
-
-
-
-
 class App extends React.Component{
     constructor(props){
         super(props)
@@ -252,18 +246,28 @@ class VolunteerForm extends React.Component{
         // this.state.firstName = this.state.firstName.bind(this)
 
         this.handleChage = this.handleChage.bind(this)
+
+        this.testFirebase = this.testFirebase.bind(this)
     }
    
-
     handleChage(event){
         let value = event.target.value
-        console.log(this.state.firstName)
         this.setState({firstName: value})
+        console.log(this.state.firstName)
     }
 
     handleSubmit(){
+        // event.preventDefault()
         console.log('VolunteerForm.handleSubmit')
         console.log('FirstName ' + this.state.firstName)
+    }
+
+    testFirebase(){
+        // console.log('test firebase!')
+        console.log(this.state.firstName)
+        database.ref('responses/').set({
+            firstName: this.state.firstName
+        })
 
     }
 
@@ -271,10 +275,10 @@ class VolunteerForm extends React.Component{
         const firstName = this.state.firstName
 
         return(
-            <Container>
+            // <Container>
                 <Form 
                     onSubmit={
-                        ()=> this.handleSubmit()    
+                        ()=> this.handleSubmit    
                         // ()=> this.props.onSubmit()
                         }
                 > 
@@ -298,13 +302,21 @@ class VolunteerForm extends React.Component{
                                 {/* <Form.Text onChange={this.handleChange}> </Form.Text>
                             </Form.Group> */}
                         </Col>
-                        <Col>
+                        {/* <Col>
                             <Form.Group>
                                 <Form.Label>Last Name</Form.Label>
                                 <Form.Control type='text' placeholder='Last Name'></Form.Control>
                                 <Form.Text></Form.Text>
                             </Form.Group>
-                        </Col>
+                        </Col> */}
+                    </Row>
+                    <Row>
+                        <Button
+                            variant='basic'
+                            onClick={this.testFirebase}
+                        >
+                            Test Firebase
+                        </Button>
                     </Row>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
@@ -321,12 +333,13 @@ class VolunteerForm extends React.Component{
                         <Form.Control as='textarea' rows={3}></Form.Control>
                     </Form.Group>
                     <Button
-                        type='submit' variant='basic'
+                        type='submit' 
+                        variant='basic'
                         >
                         Submit
                     </Button>
                 </Form>
-            </Container>
+            // </Container>
         )
     }
 }
