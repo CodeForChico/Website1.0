@@ -62,11 +62,11 @@ class App extends React.Component{
         this.setState({page:"home"})
     }
 
-    handleVolenteerSubmit(){
-        this.setState({page:"postSubmit"})
-        console.log('Volunteer Form Submitted')
-        console.log()
-    }
+    // handleVolenteerSubmit(){
+    //     this.setState({page:"postSubmit"})
+    //     // console.log('Volunteer Form Submitted')
+    //     console.log()
+    // }
 
     render(){
         const page = this.state.page
@@ -79,8 +79,8 @@ class App extends React.Component{
             case 'home':
                 display =
                 <div>
-                    <VolunteerForm 
-                        onSubmit = {()=>this.handleVolenteerSubmit()}/>
+                    <VolunteerForm />
+                        {/* onSubmit = {()=>this.handleVolenteerSubmit()}/> */}
                     {/* <Navigation 
                         page = {this.state.page}/>
                     <VolunteerCard 
@@ -247,14 +247,37 @@ class VolunteerButton extends React.Component{
 class VolunteerForm extends React.Component{
     constructor(props) {
         super(props)
-        this.state = {
-        }
+        this.state={firstName: ''}
+        // this.handleSubmit = this.handleSubmit.bind(this)
+        // this.state.firstName = this.state.firstName.bind(this)
+
+        this.handleChage = this.handleChage.bind(this)
     }
+   
+
+    handleChage(event){
+        let value = event.target.value
+        console.log(this.state.firstName)
+        this.setState({firstName: value})
+    }
+
+    handleSubmit(){
+        console.log('VolunteerForm.handleSubmit')
+        console.log('FirstName ' + this.state.firstName)
+
+    }
+
     render(){
+        const firstName = this.state.firstName
+
         return(
             <Container>
                 <Form 
-                    onSubmit={()=> this.props.onSubmit()}> 
+                    onSubmit={
+                        ()=> this.handleSubmit()    
+                        // ()=> this.props.onSubmit()
+                        }
+                > 
                     <Form.Group>
                         <Form.Label>How do you wa to help?</Form.Label>
                         <Form.Control as='select'>
@@ -264,11 +287,16 @@ class VolunteerForm extends React.Component{
                     </Form.Group>
                     <Row>
                         <Col>
-                            <Form.Group>
-                                <Form.Label>First Name</Form.Label>
-                                <Form.Control type='text' placeholder='First Name'></Form.Control>
-                                <Form.Text></Form.Text>
-                            </Form.Group>
+                            {/* <Form.Group>
+                                <Form.Label>First Name</Form.Label> */}
+                                <Form.Control 
+                                    type='text' 
+                                    placeholder='First Name'
+                                    onChange={this.handleChage}
+                                    value={firstName}
+                                />
+                                {/* <Form.Text onChange={this.handleChange}> </Form.Text>
+                            </Form.Group> */}
                         </Col>
                         <Col>
                             <Form.Group>
