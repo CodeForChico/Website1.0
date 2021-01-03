@@ -11,9 +11,34 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 
-import firebase from 'firebase/app'
+// firebase imports
 
-// import App from './App working_keepsafe';
+import firebase from 'firebase/app'
+import 'firebase/database'
+import 'firebase/auth'
+
+//initialize firebase  app
+var firebaseConfig = {
+    apiKey: "AIzaSyCQNv6m_TGkSoOdnUNOR6dFPANcW84BZr8",
+    authDomain: "codeforchico.firebaseapp.com",
+    databaseURL: "https://codeforchico.firebaseio.com",
+    projectId: "codeforchico",
+    storageBucket: "codeforchico.appspot.com",
+    messagingSenderId: "796780063844",
+    appId: "1:796780063844:web:23fdaa49a727d2ccaf8371",
+    measurementId: "G-ZJ49GTHPXX"
+    };
+
+firebase.initializeApp(firebaseConfig)
+var database = firebase.database()
+
+console.log(database.rows)
+
+// var defaultStorage = defaultProject.storage()
+// var defaultFirestore = defaultProject.firestore()
+
+
+
 
 class App extends React.Component{
     constructor(props){
@@ -38,7 +63,9 @@ class App extends React.Component{
     }
 
     handleVolenteerSubmit(){
+        this.setState({page:"postSubmit"})
         console.log('Volunteer Form Submitted')
+        console.log()
     }
 
     render(){
@@ -53,7 +80,7 @@ class App extends React.Component{
                 display =
                 <div>
                     <VolunteerForm 
-                        onClick = {()=>this.handleVolenteerSubmit()}/>
+                        onSubmit = {()=>this.handleVolenteerSubmit()}/>
                     {/* <Navigation 
                         page = {this.state.page}/>
                     <VolunteerCard 
@@ -79,8 +106,20 @@ class App extends React.Component{
                     <p>Comunity Parnter Form coming soon!</p>
                 </div>
             break;
+            case 'postSubmit':
+                display =
+                <div>
+                    <Navigation 
+                        onClick={()=>this.handleClickHome()}/>
+                    <p>Thank you for your interest! We will be in touch soon!</p>
+                </div>
+            break;
             default:
-                <div>Something has gone wrong: default case</div>
+                <div>
+                    <Navigation 
+                    onClick={()=>this.handleClickHome()}/>
+                    <div>Something has gone wrong: default case</div>
+                </div>
             }
 
         return(
@@ -214,9 +253,10 @@ class VolunteerForm extends React.Component{
     render(){
         return(
             <Container>
-                <Form>
+                <Form 
+                    onSubmit={()=> this.props.onSubmit()}> 
                     <Form.Group>
-                        <Form.Label>How do you want to help?</Form.Label>
+                        <Form.Label>How do you wa to help?</Form.Label>
                         <Form.Control as='select'>
                             <option>Volunteer</option>
                             <option>Comunity Partner</option>
@@ -253,8 +293,7 @@ class VolunteerForm extends React.Component{
                         <Form.Control as='textarea' rows={3}></Form.Control>
                     </Form.Group>
                     <Button
-                        variant='basic'
-                        onClick = {() => this.props.onClick()}
+                        type='submit' variant='basic'
                         >
                         Submit
                     </Button>
