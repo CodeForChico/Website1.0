@@ -9,7 +9,9 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { Navbar } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form'
+
+import firebase from 'firebase/app'
 
 // import App from './App working_keepsafe';
 
@@ -35,6 +37,10 @@ class App extends React.Component{
         this.setState({page:"home"})
     }
 
+    handleVolenteerSubmit(){
+        console.log('Volunteer Form Submitted')
+    }
+
     render(){
         const page = this.state.page
         let display
@@ -46,12 +52,14 @@ class App extends React.Component{
             case 'home':
                 display =
                 <div>
-                    <Navigation 
+                    <VolunteerForm 
+                        onClick = {()=>this.handleVolenteerSubmit()}/>
+                    {/* <Navigation 
                         page = {this.state.page}/>
                     <VolunteerCard 
                         onClick = {()=>this.handleClickVolunteer()} />
                     <ComunityPartnerCard 
-                        onClick = {()=>this.handleClickComunityPartner()} />
+                        onClick = {()=>this.handleClickComunityPartner()} /> */}
                 </div>
             break;
             case 'volunteerForm':
@@ -60,6 +68,7 @@ class App extends React.Component{
                     <Navigation 
                         onClick = {()=>this.handleClickHome()}/>
                     <p>Volunteer Form coming soon!</p>
+                    <VolunteerForm />
                 </div>
             break;
             case 'comunityPartnerForm':
@@ -130,8 +139,6 @@ class VolunteerCard extends React.Component{
         this.state = {
         }
     }
-
-
     render(){
         return(
             <Card>
@@ -198,5 +205,63 @@ class VolunteerButton extends React.Component{
     }
 }
 
+class VolunteerForm extends React.Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+        }
+    }
+    render(){
+        return(
+            <Container>
+                <Form>
+                    <Form.Group>
+                        <Form.Label>How do you want to help?</Form.Label>
+                        <Form.Control as='select'>
+                            <option>Volunteer</option>
+                            <option>Comunity Partner</option>
+                        </Form.Control>
+                    </Form.Group>
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Control type='text' placeholder='First Name'></Form.Control>
+                                <Form.Text></Form.Text>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Last Name</Form.Label>
+                                <Form.Control type='text' placeholder='Last Name'></Form.Control>
+                                <Form.Text></Form.Text>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Form.Group>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type='email' placeholder='your.email@domain.com'></Form.Control>
+                        <Form.Text></Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Phone</Form.Label>
+                        <Form.Control type='phone' placeholder='(777) 123-4444'></Form.Control>
+                        <Form.Text></Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Tell us about yourself?</Form.Label>
+                        <Form.Control as='textarea' rows={3}></Form.Control>
+                    </Form.Group>
+                    <Button
+                        variant='basic'
+                        onClick = {() => this.props.onClick()}
+                        >
+                        Submit
+                    </Button>
+                </Form>
+            </Container>
+        )
+    }
+}
 
 export default App;
