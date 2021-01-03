@@ -241,21 +241,58 @@ class VolunteerButton extends React.Component{
 class VolunteerForm extends React.Component{
     constructor(props) {
         super(props)
-        this.state={firstName: ''}
-        // this.handleSubmit = this.handleSubmit.bind(this)
-        // this.state.firstName = this.state.firstName.bind(this)
+        this.state={
+            interestType: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            about:''
+        }
 
-        this.handleChage = this.handleChage.bind(this)
+        this.handleChangeInterestType = this.handleChangeInterestType.bind(this)
+        this.handleChangeFirstName = this.handleChangeFirstName.bind(this)
+        this.handleChangeLastName = this.handleChangeLastName.bind(this)
+        this.handleChangeEmail = this.handleChangeEmail.bind(this)
+        this.handleChangePhone = this.handleChangePhone.bind(this)
+        this.handleChangeAbout = this.handleChangeAbout.bind(this)
 
         this.testFirebase = this.testFirebase.bind(this)
     }
-   
-    handleChage(event){
+//Handle Change
+/*************************************************************************************/
+    // interestType: '',
+    handleChangeInterestType(event){
+        let value = event.target.value
+        this.setState({interestType: value})
+    }
+    // firstName: '',
+    //as it is types - each key stoke updates the variable
+    handleChangeFirstName(event){
         let value = event.target.value
         this.setState({firstName: value})
-        console.log(this.state.firstName)
     }
-
+    // lastName: '',
+    handleChangeLastName(event){
+        let value = event.target.value
+        this.setState({lastName: value})
+    }
+    // email: '',
+    handleChangeEmail(event){
+        let value = event.target.value
+        this.setState({email: value})
+    }
+    // phone: '',
+    handleChangePhone(event){
+        let value = event.target.value
+        this.setState({phone: value})
+    }
+    // about:''
+    handleChangeAbout(event){
+        let value = event.target.value
+        this.setState({about: value})
+    }
+/*************************************************************************************/
     handleSubmit(){
         // event.preventDefault()
         console.log('VolunteerForm.handleSubmit')
@@ -264,18 +301,23 @@ class VolunteerForm extends React.Component{
 
     testFirebase(){
         // console.log('test firebase!')
-        console.log(this.state.firstName)
-        database.ref('responses/').set({
-            firstName: this.state.firstName
-        })
+        console.log(this.state)
+        // database.ref('responses/').set({
+        //     firstName: this.state.firstName
+        // })
 
     }
 
     render(){
+        const interestType = this.state.interestType
         const firstName = this.state.firstName
+        const lastName = this.state.lastName
+        const email = this.state.email
+        const phone = this.state.phone
+        const about = this.state.about
 
         return(
-            // <Container>
+            <Container>
                 <Form 
                     onSubmit={
                         ()=> this.handleSubmit    
@@ -283,32 +325,39 @@ class VolunteerForm extends React.Component{
                         }
                 > 
                     <Form.Group>
-                        <Form.Label>How do you wa to help?</Form.Label>
-                        <Form.Control as='select'>
+                        <Form.Label>How do you want to help?</Form.Label>
+                        <Form.Control 
+                            as='select'
+                            onChange={this.handleChangeInterestType}
+                            value={interestType}
+                        >
                             <option>Volunteer</option>
                             <option>Comunity Partner</option>
                         </Form.Control>
                     </Form.Group>
                     <Row>
                         <Col>
-                            {/* <Form.Group>
-                                <Form.Label>First Name</Form.Label> */}
+                            <Form.Group>
+                                <Form.Label>First Name</Form.Label>
                                 <Form.Control 
                                     type='text' 
                                     placeholder='First Name'
-                                    onChange={this.handleChage}
+                                    onChange={this.handleChangeFirstName}
                                     value={firstName}
                                 />
-                                {/* <Form.Text onChange={this.handleChange}> </Form.Text>
-                            </Form.Group> */}
+                            </Form.Group>
                         </Col>
-                        {/* <Col>
+                        <Col>
                             <Form.Group>
                                 <Form.Label>Last Name</Form.Label>
-                                <Form.Control type='text' placeholder='Last Name'></Form.Control>
-                                <Form.Text></Form.Text>
+                                <Form.Control 
+                                    type='text' 
+                                    placeholder='Last Name'
+                                    onChange={this.handleChangeLastName}
+                                    value={lastName}
+                                />
                             </Form.Group>
-                        </Col> */}
+                        </Col>
                     </Row>
                     <Row>
                         <Button
@@ -320,17 +369,30 @@ class VolunteerForm extends React.Component{
                     </Row>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type='email' placeholder='your.email@domain.com'></Form.Control>
-                        <Form.Text></Form.Text>
+                        <Form.Control 
+                            type='email' 
+                            placeholder='your.email@domain.com'
+                            onChange={this.handleChangeEmail}
+                            value={email}
+                        />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Phone</Form.Label>
-                        <Form.Control type='phone' placeholder='(777) 123-4444'></Form.Control>
-                        <Form.Text></Form.Text>
+                        <Form.Control 
+                            type='phone' 
+                            placeholder='(777) 123-4444'
+                            onChange={this.handleChangePhone}
+                            value={phone}
+                        />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Tell us about yourself?</Form.Label>
-                        <Form.Control as='textarea' rows={3}></Form.Control>
+                        <Form.Control 
+                            as='textarea' 
+                            rows={3}
+                            onChange={this.handleChangeAbout}
+                            value={about}
+                        />
                     </Form.Group>
                     <Button
                         type='submit' 
@@ -339,7 +401,7 @@ class VolunteerForm extends React.Component{
                         Submit
                     </Button>
                 </Form>
-            // </Container>
+            </Container>
         )
     }
 }
