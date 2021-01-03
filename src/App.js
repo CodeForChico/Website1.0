@@ -9,42 +9,129 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { Navbar } from 'react-bootstrap';
 
 // import App from './App working_keepsafe';
 
 class App extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
+            page: 'home'
+        }
+    }
+
+    handleClickVolunteer(){
+        console.log('ive been clicked')
+        this.setState({page: 'volunteerForm'})
+    }
+
+    handleClickComunityPartner(){
+        console.log('ive been clicked')
+        this.setState({page: 'comunityPartnerForm'})
+    }
+
+    handleClickHome(){
+        this.setState({page:"home"})
+    }
+
     render(){
+        const page = this.state.page
+        let display
+        //here, in the render statement of the App class
+        //we can use a case statement on the state - in this case i will use
+        //a state called page to keep of the navigation alogy through the app
+
+        switch(page){
+            case 'home':
+                display =
+                <div>
+                    <Navigation 
+                        page = {this.state.page}/>
+                    <VolunteerCard 
+                        onClick = {()=>this.handleClickVolunteer()} />
+                    <ComunityPartnerCard 
+                        onClick = {()=>this.handleClickComunityPartner()} />
+                </div>
+            break;
+            case 'volunteerForm':
+                display =
+                <div>
+                    <Navigation 
+                        onClick = {()=>this.handleClickHome()}/>
+                    <p>Volunteer Form coming soon!</p>
+                </div>
+            break;
+            case 'comunityPartnerForm':
+                display =
+                <div>
+                    <Navigation 
+                        onClick={()=>this.handleClickHome()}/>
+                    <p>Comunity Parnter Form coming soon!</p>
+                </div>
+            break;
+            default:
+                <div>Something has gone wrong: default case</div>
+            }
 
         return(
             <div className="App">
-                <Navigation 
-                    onSubmit = {this.handleSubmit}
-                />
-                <VolunteerCard />
-                <ComunityPartnerCard />
+                {display}
             </div>
-        );
+        )
+
+
     }
 }
 
 class Navigation extends React.Component{
-
-    render(){
-        return(
-            <div className ="Nav">
-                <Card>
-                    <Card.Img></Card.Img>
-                    <Card.Body>
-                        <Card.Title>Code for Chico</Card.Title>
-                    </Card.Body>
-                </Card>
-            </div>
-        );
+    constructor(props){
+        super(props)
+        this.state={   
+        }
     }
+    render(){
+        let page, nav
+        
+        page = this.props.page
+        switch(page){
+            case 'home':
+            nav = 
+                <div className ="Nav">
+                    <Card>
+                        <Card.Body>
+                            <Card.Title>Code for Chico</Card.Title>
+                            </Card.Body>
+                    </Card>
+                </div>
+            break;
+            default:
+            nav =
+                <div className ="Nav">
+                    <Card>
+                        <Card.Body>
+                            <Card.Title>Code for Chico</Card.Title>
+                            <Button
+                                variant = 'basic'
+                                onClick = {()=>this.props.onClick()}
+                            >Home</Button>
+                        </Card.Body>
+                    </Card>
+                </div>
+            }
+
+            return(nav)  
+        }
 }
 
 class VolunteerCard extends React.Component{
-   
+    constructor(props) {
+        super(props)
+        this.state = {
+        }
+    }
+
+
     render(){
         return(
             <Card>
@@ -52,7 +139,10 @@ class VolunteerCard extends React.Component{
                 <Card.Body>
                     <p>If you are just learning or have years of experience we need your help to build good things together.</p>
                     <p>See how you can help</p>
-                    <VolunteerButton label="Volunteer" />
+                    <VolunteerButton 
+                        label="Volunteer" 
+                        onClick= {()=>this.props.onClick()}
+                    />
                 </Card.Body>
             </Card>
         );
@@ -60,7 +150,11 @@ class VolunteerCard extends React.Component{
 }
 
 class ComunityPartnerCard extends React.Component{
-
+    constructor(props) {
+        super(props)
+        this.state = {
+        }
+    }
     render(){
         return(
         <Card>
@@ -79,7 +173,10 @@ class ComunityPartnerCard extends React.Component{
                          and to look for creative solutions to challenging problems.
                     </Row>
                 </Container>
-                <VolunteerButton label ='Join Us'/>
+                <VolunteerButton 
+                    label ='Join Us'
+                    onClick = {()=>this.props.onClick()}
+                />
             </Card.Body>
         </Card>
         );
@@ -92,7 +189,8 @@ class VolunteerButton extends React.Component{
         return(
             <Button 
                 variant = "basic"
-                onClick = {function() {alert('Thank you for your interest! Please come back soon we are still building this site!')}}
+                // onClick = {function() {alert('Thank you for your interest! Please come back soon we are still building this site!')}}
+                onClick = {()=>this.props.onClick()}
                 >
             {this.props.label}
             </Button>
