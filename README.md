@@ -1,17 +1,17 @@
 # Code for Chico
 
 This is Code for Chico - we are a brand new not for profit organization in Chico, CA.
-Our goal is to help make the comunity we live in a better place for all who live here.
+Our goal is to help make the community we live in a better place for all who live here.
 
-If you would like to contact us reach out to paul.davis@codeforchico.org
+If you would like to contact us, reach out to [paul.davis@codeforchico.org](mailto:paul.davis@codeforchico.org)
 
 **_yeet_**
 
-## Notes Hey its New Years Day 2021
+## Notes - Hey its New Years Day 2021
 So because I kind of got this working a little bit, I think I should take some notes about how its working.
 Take this with a grain of salt because I don't really know what I am doing.
 
-I build this with npx crete-react-app. Then I installed npm gh-pages and set up the package.json file per the instructions to add a predeploy and deploy scripts.
+I build this with `npx create-react-app`. Then I installed npm gh-pages and set up the package.json file per the instructions to add a predeploy and deploy scripts.
 
 There is a wierd and confising thing going on in the branch structure of the repo so LOOKOUT!
     Basically, Im developing on MAIN branch, but when I run npm run deploy from cmd console of /Website1.0 on MAIM branch it published a producution copy of the app to the MASTER branch of the repo on git. This MASTER brach is the source for the gh-pages Code For America website at codeforamerica.org
@@ -24,17 +24,24 @@ There is a wierd and confising thing going on in the branch structure of the rep
     origin  https://github.com/CodeForChico/Website1.0 (fetch)
     origin  https://github.com/CodeForChico/Website1.0 (push) 
 
-## Spin up a new Dev Sesh from Scratch
-*Again this won't be perfect:*
-    1. clone the CodeForChico/Website1.0 repo - you will need MAIN and MASTER branches
-    2. you need like node.js and stuff. I think you run **npm install** on your locol repo? to make sure you have all the pakage dependencies you need locally? I am new at this. You also need to have git installed. I use WSL for my git on windows, but i had to install git for windows, and set my globals in order for npm run deploy in step 5 to work right.
-    3. if you get it right, you should be able to then run **npm start** and you'll have a dev session running with a local server and a browser session with the app at local host. 
-    4. dev should only be done in the src directory. Once you have your stuff working locally, commit the changes to MAIN repo remote (github)
-    5. stop your dev session and run **npm run deploy**, this will publish the production copy to CodeForChico. If you get errors here, which I did, a lot, i needed to install git. reach out to paul.davis@codeforchico.org if you get stuck.
+## Requirements ##
+- [Node.js](https://nodejs.org/en/download/)
+
+## Spin Up a New Local Session from Scratch
+*This process is in active development and subject to change:*
+
+1. Clone the CodeForChico/Website1.0 repo - you will need MAIN and MASTER branches.
+2. Run `npm install` on your local copy to make sure you have all the pakage dependencies you need locally.
+3. Run `npm start` and you'll have a dev session running with a local server and a browser session with the app at local host.
+
+## Updating and Deploying
+
+1. Development should only be done in the src directory. Once you have your changes working locally, commit the changes to MAIN repo remote (github)
+2. Stop your dev session and run `npm run deploy`, this will publish the production copy to CodeForChico. If you get errors here, which I did, a lot, you may need to install git. Reach out to [paul.davis@codeforchico.org](mailto:paul.davis@codeforchico.org) if you get stuck.
 
 
 ## Getting Started with Create React App
-*From here down is the create-react-app boilerplade README - im not ready to part with it yet*
+*From here down is the create-react-app boilerplate README - I'm not ready to part with it yet.*
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
